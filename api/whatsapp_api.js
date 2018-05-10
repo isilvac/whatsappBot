@@ -3,7 +3,7 @@ const request = require('request');
 var token = process.env.API_TOKEN;
 var phone = process.env.MSISDN;
 
-var sendText = (destination, message) => {
+var sendText = (destination, message, callback) => {
     var messageId = Date.now() + phone;
     var url2Call = `https://www.waboxapp.com/api/send/chat?token=${token}&uid=${phone}&to=${destination}&custom_uid=${messageId}&text=${message}`;
 
@@ -29,7 +29,7 @@ var sendText = (destination, message) => {
     }
 };
 
-var sendImage = (destination, url, title, description) => {
+var sendImage = (destination, url, title, description, callback) => {
     var messageId = Date.now() + phone;
     var url2Call = `https://www.waboxapp.com/api/send/image?token=${token}&uid=${phone}&to=${destination}&custom_uid=${messageId}&url=${url}`;
 

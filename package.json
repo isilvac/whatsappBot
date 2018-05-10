@@ -9,8 +9,10 @@
   "author": "Ignacio Silva",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
+    "fs": "0.0.1-security",
     "http": "0.0.0",
     "https": "^1.0.0",
     "request": "^2.85.0"
