@@ -3,6 +3,7 @@ require('dotenv').config();
 
 //import modules
 const express = require('express');
+const https = require('https');
 
 //import internal modules
 const whatsapp = require('./api/whatsapp_api');
@@ -14,14 +15,18 @@ var port = process.env.HTTPS_PORT || 3000;
 var options = {
     host: process.env.HTTPS_HOST,
     servername: process.env.HTTPS_SERVERNAME,
-    port: port
+    port: port,
+    key: fs.readFileSync(process.env.HTTPS_KEY),
+    cert: fs.readFileSync(process.env.HTTPS_CERT),
+    ca: fs.readFileSync(process.env.HTTPS_CA)
 };
 
 var date = new Date();
 // Start listening
-app.listen(port, () => {
-    console.log(`${date.toISOString()} - Server started at ${port}`)
-});
+https.createServer(options, app).listen(
+    port,
+    () => { console.log(`${date.toISOString()} - Server started at ${port}`) }
+);
 
 app.post('/wh', function (req, res) {
     const data = JSON.parse(req.body);
